@@ -1,8 +1,4 @@
 package edu.stu.cipher.model;
-/* A5/1 là thuật toán mã hóa dòng (stream cipher):
-Mã hóa và giải mã dùng chung một phương thức duy nhất vì phép toán chính là XOR, và XOR có tính tự nghịch đảo <3
-*/
-
 /**
  * Lớp A5_1 mô phỏng thuật toán mã hóa dòng A5/1.
  * Thuật toán này dùng 3 thanh ghi dịch phản hồi tuyến tính (LFSR)
@@ -94,16 +90,8 @@ public class A5_1 extends CipherBase{
         System.arraycopy(R3, 0, R3, 1, R3.length - 1);
         R3[0] = newBit;
     }
-
-    /**
-     * Mã hóa hoặc giải mã mảng byte.
-     * Vì XOR là phép đảo ngược được → cùng hàm dùng cho cả hai.
-     * @param data
-     * @return 
-     */
     
-    @Override
-    public byte[] process(byte[] data) {
+    public byte[] xorWithKeyStream(byte[] data) {
         byte[] output = new byte[data.length];
 
         for (int i = 0; i < data.length; i++) {
@@ -115,5 +103,14 @@ public class A5_1 extends CipherBase{
             output[i] = (byte)(data[i] ^ ksByte);
         }
         return output; // trả về mảng byte đã mã hóa hoặc giải mã
+    }
+      @Override
+    public byte[] encrypt(byte[] data) {
+        return xorWithKeyStream(data);
+    }
+
+    @Override
+    public byte[] decrypt(byte[] data) {
+        return xorWithKeyStream(data);
     }
 }

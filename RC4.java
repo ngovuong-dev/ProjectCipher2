@@ -43,13 +43,21 @@ public class RC4 extends CipherBase {
     }
 
     // Mã hóa hoặc giải mã mảng byte
-    @Override
-    public byte[] process(byte[] data) {
+    public byte[] xorWithKeyStream(byte[] data) {
         byte[] output = new byte[data.length];
         for (int k = 0; k < data.length; k++) {
             // Lấy 1 byte keystream và XOR với byte dữ liệu
             output[k] = (byte) (data[k] ^ getKeyStreamByte());
         }
         return output;
+    }
+    @Override
+     public byte[] encrypt(byte[] data) {
+        return xorWithKeyStream(data);
+    }
+
+    @Override
+    public byte[] decrypt(byte[] data) {
+        return xorWithKeyStream(data);
     }
 }
