@@ -1,6 +1,5 @@
 package edu.stu.cipher2.view;
 
-
 import edu.stu.cipher2.view.panelModel.CipherPanel;
 import javax.swing.*;
 import java.awt.*;
@@ -12,6 +11,7 @@ public class MainFrame extends JFrame {
     
     public MainFrame() { // MainFrame Function
         initComponents();
+        
     }
 
     private void initComponents() {
